@@ -1,0 +1,15 @@
+﻿<p>Render Mode: @_renderMode</p>
+
+@code {
+    private string _renderMode = "Static server-side rendering";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            _renderMode = OperatingSystem.IsBrowser() ? "Client-side rendering" : "Active server-side rendering";
+            StateHasChanged();
+        }
+    }
+}
